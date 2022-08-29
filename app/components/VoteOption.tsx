@@ -4,7 +4,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import React from "react";
 import { capitalize } from "../utils";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   button: {
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
