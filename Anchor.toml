@@ -3,6 +3,9 @@ seeds = false
 [programs.localnet]
 crunchy_vs_smooth = "7dJxpeqJYp8rQt3mmV8Y8xp5pKcnbPqzht4T4its77hG"
 
+[programs.devnet]
+crunchy_vs_smooth = "7dJxpeqJYp8rQt3mmV8Y8xp5pKcnbPqzht4T4its77hG"
+
 [registry]
 url = "https://anchor.projectserum.com"
 
