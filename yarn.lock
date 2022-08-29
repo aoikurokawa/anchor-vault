@@ -59,6 +59,28 @@
   dependencies:
     buffer "~6.0.3"
 
+"@solana/wallet-adapter-base@^0.9.16":
+  version "0.9.16"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-base/-/wallet-adapter-base-0.9.16.tgz#7b67e145f47a9cdc8e702eacc02fa867084a9bf4"
+  integrity sha512-nwzpzo3SjjsCkgN5ROQqoL7Y90j4QUlqxL17sg/qMcoYIBVfalyu87IZAfL5B06eSQ8jmtgnuQJW+91WcLo1ag==
+  dependencies:
+    eventemitter3 "^4.0.0"
+
+"@solana/wallet-adapter-material-ui@^0.16.14":
+  version "0.16.14"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-material-ui/-/wallet-adapter-material-ui-0.16.14.tgz#6d69fbe360c4552e51c0ec8b33c4861baa8538e3"
+  integrity sha512-8Kzf2UQ6A9/zZHkl9ANYRIk5l3e7OEA5z4HGDoCKvzXDHmp1F/Vp6BLQp6YCafSPGD0vNRoBB5BSL8ruqNcdAg==
+  dependencies:
+    "@solana/wallet-adapter-base" "^0.9.16"
+    "@solana/wallet-adapter-react" "^0.15.18"
+
+"@solana/wallet-adapter-react@^0.15.18":
+  version "0.15.18"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.15.18.tgz#7700362574c32fef25fb61314f7e0dfedb0f2fca"
+  integrity sha512-CCcv9L8kn6WBO3FFQeX5GZf+a5CyPzULZYqiZam3uQ0zvx/TIdGYgfBJIDDwjQnTKHk+BaqUURA3rqzsLbINhA==
+  dependencies:
+    "@solana/wallet-adapter-base" "^0.9.16"
+
 "@solana/web3.js@^1.36.0":
   version "1.54.1"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.54.1.tgz#c39ffa598beaa6d761ab55c78263d874f4441e14"
@@ -350,6 +372,11 @@ cliui@^7.0.2:
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
 
+clsx@^1.1.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
@@ -453,7 +480,7 @@ escape-string-regexp@4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eventemitter3@^4.0.7:
+eventemitter3@^4.0.0, eventemitter3@^4.0.7:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
@@ -546,6 +573,13 @@ he@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+hoist-non-react-statics@^3.3.0:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
+  integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
+  dependencies:
+    react-is "^16.7.0"
 
 ieee754@^1.2.1:
   version "1.2.1"
@@ -802,6 +836,14 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
+notistack@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/notistack/-/notistack-2.0.5.tgz#8eb53720453f6e02182cd0e6784ced630a7bb7e6"
+  integrity sha512-Ig2T1Muqkc1PaSQcEDrK7diKv6cBxw02Iq6uv074ySfgq524TV5lK41diAb6OSsaiWfp3aRt+T3+0MF8m2EcJQ==
+  dependencies:
+    clsx "^1.1.0"
+    hoist-non-react-statics "^3.3.0"
+
 once@^1.3.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
@@ -859,6 +901,11 @@ randombytes@^2.1.0:
   integrity sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==
   dependencies:
     safe-buffer "^5.1.0"
+
+react-is@^16.7.0:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 readdirp@~3.6.0:
   version "3.6.0"
