@@ -1,7 +1,7 @@
 [features]
 seeds = false
 [programs.localnet]
-crunchy_vs_smooth = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+crunchy_vs_smooth = "7dJxpeqJYp8rQt3mmV8Y8xp5pKcnbPqzht4T4its77hG"
 
 [registry]
 url = "https://anchor.projectserum.com"
