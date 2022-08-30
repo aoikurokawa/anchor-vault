@@ -6,30 +6,33 @@ declare_id!("7dJxpeqJYp8rQt3mmV8Y8xp5pKcnbPqzht4T4its77hG");
 pub mod crunchy_vs_smooth {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        let vote_account = &mut ctx.accounts.vote_account;
-        vote_account.crunchy = 0;
-        vote_account.smooth = 0;
+    pub fn initialize(ctx: Context<Initialize>, vote_account_bump: u8) -> Result<()> {
+        ctx.accounts.vote_account.bump = vote_account_bump;
         Ok(())
     }
 
     pub fn vote_crunchy(ctx: Context<Vote>) -> Result<()> {
-        let vote_account = &mut ctx.accounts.vote_account;
-        vote_account.crunchy += 1;
+        ctx.accounts.vote_account.crunchy += 1;
         Ok(())
     }
 
     pub fn vote_smooth(ctx: Context<Vote>) -> Result<()> {
-        let vote_account = &mut ctx.accounts.vote_account;
-        vote_account.smooth += 1;
+        ctx.accounts.vote_account.smooth += 1;
         Ok(())
     }
 }
 
 #[derive(Accounts)]
+#[instruction(vote_account_bump: u8)]
 pub struct Initialize<'info> {
-    #[account(init, payer = user, space = 16 + 16)]
-    pub vote_account: Account<'info, VoteAccount>,
+    #[account(
+        init, 
+        seeds = [b"vote_account".as_ref()],
+        bump,
+        payer = user,
+        space = 8 + VotingState::MAX_SIZE
+    )]
+    pub vote_account: Account<'info, VotingState>,
     #[account(mut)]
     pub user: Signer<'info>,
     pub system_program: Program<'info, System>,
@@ -37,12 +40,22 @@ pub struct Initialize<'info> {
 
 #[derive(Accounts)]
 pub struct Vote<'info> {
-    #[account(mut)]
-    pub vote_account: Account<'info, VoteAccount>,
+    #[account(
+        mut,
+        seeds = [b"vote_account".as_ref()],
+        bump,
+    )]
+    pub vote_account: Account<'info, VotingState>,
 }
 
 #[account]
-pub struct VoteAccount {
+#[derive(Default)]
+pub struct VotingState {
     pub crunchy: u64,
     pub smooth: u64,
+    pub bump: u8,
+}
+
+impl VotingState {
+    pub const MAX_SIZE: usize = 2 + 2 + 1;
 }
