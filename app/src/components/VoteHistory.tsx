@@ -24,7 +24,7 @@ export default function VoteHistory({ voteTxHistory }: IVoteHistory) {
         {voteTxHistory.map((txID: any, i: any) => (
           <ListItem key={txID} style={{ justifyContent: "center" }}>
             <Link
-              href={`https://explorer.solana.com/tx/${txID}`}
+              href={`https://explorer.solana.com/tx/${txID}?cluster=devnet`}
               underline="always"
             >{`Vote ${i + 1}`}</Link>
           </ListItem>

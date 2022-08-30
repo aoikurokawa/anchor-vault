@@ -3,7 +3,7 @@ import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles((theme: any) => ({
   button: {
@@ -41,8 +41,20 @@ export default function Intro({
   voteAccount,
 }: IIntro) {
   const wallet = useWallet();
-  // @ts-ignore
   const classes = useStyles();
+
+  const [walletMultiButton, setWalletMultiButton] = useState(
+    [classes.button, "hidden"].join(" ")
+  );
+
+  useEffect(() => {
+    if (wallet.connected) {
+      setWalletMultiButton([classes.button, "hidden"].join(" "));
+    } else {
+      setWalletMultiButton(classes.button);
+    }
+  }, []);
+
   return (
     <Box textAlign="center">
       <Typography
@@ -77,13 +89,7 @@ export default function Intro({
             To get started, connect your wallet below:
           </Typography>
         )}
-        <WalletMultiButton
-          className={
-            wallet.connected
-              ? [classes.button, "hidden"].join(" ")
-              : classes.button
-          }
-        />
+        <WalletMultiButton className={walletMultiButton} />
       </Box>
       {votes.crunchy == 0 && votes.crunchy == 0 && wallet.connected && (
         <Box marginTop="8px">

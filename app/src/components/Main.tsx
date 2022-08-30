@@ -116,14 +116,14 @@ export default function Main({ voteAccount, voteAccountBump, network }: IMain) {
     try {
       let tx;
       if (side === "crunchy") {
-        await program.methods
+        tx = await program.methods
           .voteCrunchy()
           .accounts({
             voteAccount: voteAccount,
           })
           .rpc();
       } else {
-        await program.methods
+        tx = await program.methods
           .voteSmooth()
           .accounts({
             voteAccount: voteAccount,
@@ -137,6 +137,7 @@ export default function Main({ voteAccount, voteAccountBump, network }: IMain) {
         smooth: account.smooth.toNumber(),
       });
       enqueueSnackbar(`Voted for ${capitalize(side)}!`, { variant: "success" });
+      console.log("transaction", tx);
       setVoteTxHistory((oldVoteTxHistory: any) => [...oldVoteTxHistory, tx]);
     } catch (error: any) {
       console.log("Transaction error: ", error);

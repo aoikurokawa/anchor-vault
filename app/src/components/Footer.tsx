@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-// import TwitterIcon from "@mui/material/icons/Twitter";
-// import GitHubIcon from "@material-ui/icons/GitHub";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -33,7 +33,6 @@ interface IFooter {
 }
 
 export default function Footer({ programID, voteAccount }: IFooter) {
-  // @ts-ignore
   const classes = useStyles();
   return (
     <AppBar position="static" className={classes.root}>
@@ -41,8 +40,8 @@ export default function Footer({ programID, voteAccount }: IFooter) {
         <Toolbar className={classes.toolbar}>
           <Typography variant="caption">
             Made by{" "}
-            <Link underline="always" href="https://brianfriel.xyz">
-              Brian Friel
+            <Link underline="always" href="https://aoia.dev">
+              Aoi
             </Link>
             {" | "}
             Powered by{" "}
@@ -52,33 +51,33 @@ export default function Footer({ programID, voteAccount }: IFooter) {
             {" | "}
             <Link
               underline="always"
-              href={`https://explorer.solana.com/address/${programID.toString()}`}
+              href={`https://explorer.solana.com/address/${programID.toString()}?cluster=devnet`}
             >
               Program ID
             </Link>
             {" | "}
-            {/* <Link
+            <Link
               underline="always"
-              href={`https://explorer.solana.com/address/${voteAccount?.publicKey.toString()}`}
+              href={`https://explorer.solana.com/address/${voteAccount?.toString()}?cluster=devnet`}
             >
               Vote Account
-            </Link> */}
+            </Link>
             {" | "}
             <Link underline="always" href="https://www.freepik.com">
               Icon Credits
             </Link>
           </Typography>
-          {/* <Box>
+          <Box>
             <Link
               className={classes.twitter}
-              href="https://twitter.com/bfriel_"
+              href="https://twitter.com/aoi18_en"
             >
               <TwitterIcon />
             </Link>
-            <Link href="https://github.com/bfriel/crunchy-vs-smooth">
+            <Link href="https://github.com/Aoi1011/crunchy-vs-smooth">
               <GitHubIcon />
             </Link>
-          </Box> */}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

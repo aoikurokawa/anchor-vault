@@ -27,7 +27,6 @@ interface IVoteTally {
 
 // Show vote counts for each side
 export default function VoteTally({ votes }: IVoteTally) {
-  // @ts-ignore
   const classes = useStyles();
 
   function getProgress() {
@@ -47,8 +46,8 @@ export default function VoteTally({ votes }: IVoteTally) {
         <Box display="flex" alignItems="flex-end">
           <Avatar
             alt=""
-            src="/images/crunchy-icon.svg"
-            className={[classes.avatar, "left"].join(" ")}
+            src="/crunchy-icon.svg"
+            // className={[classes.avatar, "left"].join(" ")}
           />
           <Typography variant="h6">Team Crunchy</Typography>
         </Box>
@@ -56,8 +55,8 @@ export default function VoteTally({ votes }: IVoteTally) {
           <Typography variant="h6">Team Smooth</Typography>
           <Avatar
             alt=""
-            src="/images/smooth-icon.svg"
-            className={[classes.avatar, "right"].join(" ")}
+            src="/smooth-icon.svg"
+            // className={[classes.avatar, "right"].join(" ")}
           />
         </Box>
       </Box>
