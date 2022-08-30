@@ -9,7 +9,7 @@ export const capitalize = (string: any) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const percentize = (decimal: any, min: any, max: any) => {
+export const percentize = (decimal: any, min?: any, max?: any) => {
   if (typeof decimal !== "number" || isNaN(decimal)) return "";
   return max === 0
     ? `${(decimal * 100).toFixed(0)}%`
