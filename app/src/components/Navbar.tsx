@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 export default function Navbar() {
-  // @ts-ignore
   const classes = useStyles();
   return (
     <AppBar position="static" className={classes.root}>
