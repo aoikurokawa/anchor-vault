@@ -5,7 +5,7 @@ import {
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
-import { FakeWalletAdapter } from "@solana/wallet-adapter-wallets";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { SnackbarProvider, useSnackbar } from "notistack";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { blue, orange } from "@mui/material/colors";
@@ -76,7 +76,7 @@ function AppWrappedWithProviders() {
        * will be compiled into your application, and only the dependencies of wallets that
        * your users connect to will be loaded.
        */
-      new FakeWalletAdapter(),
+      new PhantomWalletAdapter(),
     ],
     []
   );
