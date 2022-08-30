@@ -57,12 +57,12 @@ export default function Footer({ programID, voteAccount }: IFooter) {
               Program ID
             </Link>
             {" | "}
-            <Link
+            {/* <Link
               underline="always"
               href={`https://explorer.solana.com/address/${voteAccount?.publicKey.toString()}`}
             >
               Vote Account
-            </Link>
+            </Link> */}
             {" | "}
             <Link underline="always" href="https://www.freepik.com">
               Icon Credits
