@@ -33,8 +33,9 @@ pub struct Initialize<'info> {
         space = 8 + VotingState::MAX_SIZE
     )]
     pub vote_account: Account<'info, VotingState>,
-    #[account(mut)]
-    pub user: Signer<'info>,
+    #[account(mut, signer)]
+    /// CHECK: This is not dangerous because we don't read or write from this account
+    pub user: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
 }
 
@@ -57,5 +58,5 @@ pub struct VotingState {
 }
 
 impl VotingState {
-    pub const MAX_SIZE: usize = 2 + 2 + 1;
+    pub const MAX_SIZE: usize = 8 + 8 + 1;
 }

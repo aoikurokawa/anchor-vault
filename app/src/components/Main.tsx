@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Connection } from "@solana/web3.js";
-import { Program, AnchorProvider, web3, Idl } from "@project-serum/anchor";
+import { Program, AnchorProvider, web3, Idl, BN } from "@project-serum/anchor";
 import { useState } from "react";
 import { Box, Container, Grid } from "@mui/material";
 
@@ -16,8 +16,9 @@ import VoteHistory from "./VoteHistory";
 import { preflightCommitment, programID, capitalize } from "../utils";
 
 interface IMain {
-  network: any;
   voteAccount: any;
+  voteAccountBump: any;
+  network: any;
 }
 
 interface IVoteAccount {
@@ -25,9 +26,9 @@ interface IVoteAccount {
   smooth: number;
 }
 
-export default function Main({ network, voteAccount }: IMain) {
+export default function Main({ voteAccount, voteAccountBump, network }: IMain) {
   const { enqueueSnackbar } = useSnackbar();
-  const { publicKey, wallet, signTransaction, signAllTransactions } =
+  const { publicKey, signTransaction, signAllTransactions, wallet } =
     useWallet();
   const signerWallet = {
     publicKey: publicKey!,
@@ -42,7 +43,6 @@ export default function Main({ network, voteAccount }: IMain) {
   const [voteTxHistory, setVoteTxHistory] = useState([]) as any[];
 
   useEffect(() => {
-    // Call Solana program for vote count
     async function getVotes() {
       const connection = new Connection(network, preflightCommitment);
       const provider = new AnchorProvider(connection, signerWallet, {
@@ -50,12 +50,12 @@ export default function Main({ network, voteAccount }: IMain) {
       });
       const program = new Program(idl as Idl, programID, provider);
       try {
-        const account: any = await program.account.voteAccount.fetch(
-          voteAccount.publicKey
+        const account: any = await program.account.votingState.fetch(
+          voteAccount
         );
         setVotes({
-          crunchy: parseInt(account.crunchy.toString()),
-          smooth: parseInt(account.smooth.toString()),
+          crunchy: account.crunchy?.toNumber(),
+          smooth: account.smooth?.toNumber(),
         });
       } catch (error) {
         console.log("could not getVotes: ", error);
@@ -79,30 +79,33 @@ export default function Main({ network, voteAccount }: IMain) {
   async function initializeVoting() {
     const provider = await getProvider();
     const program = new Program(idl as Idl, programID, provider);
+    console.log("Vote Account Bump", voteAccountBump);
+    console.log("Vote Account", voteAccount);
+    console.log("wallet public key", provider.wallet.publicKey);
+
     try {
       await program.methods
-        .initialize()
+        .initialize(voteAccountBump)
         .accounts({
-          voteAccount: voteAccount.publicKey,
+          voteAccount: voteAccount,
           user: provider.wallet.publicKey,
           systemProgram: web3.SystemProgram.programId,
         })
-        .signers([voteAccount])
         .rpc();
 
-      const account: any = await program.account.voteAccount.fetch(
-        voteAccount.publicKey
-      );
+      const account: any = await program.account.votingState.fetch(voteAccount);
+
+      console.log("Account", account);
 
       setVotes({
-        crunchy: parseInt(account.crunchy.toString()),
-        smooth: parseInt(account.smooth.toString()),
+        crunchy: account.crunchy?.toNumber(),
+        smooth: account.smooth?.toNumber(),
       });
       enqueueSnackbar("Vote account initialized", { variant: "success" });
     } catch (error: any) {
       console.log("Transaction error: ", error);
-      console.log(error.toString());
-      enqueueSnackbar(`Error: ${error.toString()}`, { variant: "error" });
+      // console.log(error.toString());
+      // enqueueSnackbar(`Error: ${error.toString()}`, { variant: "error" });
     }
   }
 
@@ -128,8 +131,8 @@ export default function Main({ network, voteAccount }: IMain) {
         voteAccount.publicKey
       );
       setVotes({
-        crunchy: parseInt(account.crunchy.toString()),
-        smooth: parseInt(account.smooth.toString()),
+        crunchy: account.crunchy.toNumber(),
+        smooth: account.smooth.toNumber(),
       });
       enqueueSnackbar(`Voted for ${capitalize(side)}!`, { variant: "success" });
       setVoteTxHistory((oldVoteTxHistory: any) => [...oldVoteTxHistory, tx]);

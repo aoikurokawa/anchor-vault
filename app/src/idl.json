@@ -8,7 +8,7 @@
         {
           "name": "voteAccount",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "user",
@@ -21,7 +21,12 @@
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "voteAccountBump",
+          "type": "u8"
+        }
+      ]
     },
     {
       "name": "voteCrunchy",
@@ -48,7 +53,7 @@
   ],
   "accounts": [
     {
-      "name": "VoteAccount",
+      "name": "VotingState",
       "type": {
         "kind": "struct",
         "fields": [
@@ -59,6 +64,10 @@
           {
             "name": "smooth",
             "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
