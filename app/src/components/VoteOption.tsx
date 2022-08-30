@@ -15,12 +15,11 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 interface IVoteOption {
-  side: any;
+  side: string;
   handleVote: any;
 }
 
 export default function VoteOption({ side, handleVote }: IVoteOption) {
-  // @ts-ignore
   const classes = useStyles();
   const wallet = useWallet();
   return (

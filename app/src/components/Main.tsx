@@ -114,22 +114,24 @@ export default function Main({ voteAccount, voteAccountBump, network }: IMain) {
     const provider = await getProvider();
     const program = new Program(idl as Idl, programID, provider);
     try {
-      const tx =
-        side === "crunchy"
-          ? await program.rpc.voteCrunchy({
-              accounts: {
-                voteAccount: voteAccount.publicKey,
-              },
-            })
-          : await program.rpc.voteSmooth({
-              accounts: {
-                voteAccount: voteAccount.publicKey,
-              },
-            });
+      let tx;
+      if (side === "crunchy") {
+        await program.methods
+          .voteCrunchy()
+          .accounts({
+            voteAccount: voteAccount,
+          })
+          .rpc();
+      } else {
+        await program.methods
+          .voteSmooth()
+          .accounts({
+            voteAccount: voteAccount,
+          })
+          .rpc();
+      }
 
-      const account: any = await program.account.voteAccount.fetch(
-        voteAccount.publicKey
-      );
+      const account: any = await program.account.votingState.fetch(voteAccount);
       setVotes({
         crunchy: account.crunchy.toNumber(),
         smooth: account.smooth.toNumber(),
