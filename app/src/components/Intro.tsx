@@ -85,37 +85,39 @@ export default function Intro({
           }
         />
       </Box>
-      {(typeof votes.crunchy !== "number" ||
-        typeof votes.crunchy !== "number") &&
-        wallet.connected && (
-          <Box marginTop="8px">
-            <Typography variant="body1">
-              This{" "}
-              <Link
-                href={`https://explorer.solana.com/address/${programID.toString()}`}
-                underline="always"
-              >
-                program
-              </Link>
-              {"'s "}
-              <Link
-                href={`https://explorer.solana.com/address/${voteAccount?.publicKey.toString()}`}
-                underline="always"
-              >
-                vote account
-              </Link>{" "}
-              has not been initialized yet:
-            </Typography>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={initializeVoting}
-              className={classes.button}
+      {votes.crunchy == 0 && votes.crunchy == 0 && wallet.connected && (
+        <Box marginTop="8px">
+          <Typography variant="body1">
+            This{" "}
+            <Link
+              href={`https://explorer.solana.com/address/${programID.toString()}`}
+              underline="always"
             >
-              Initialize Program
-            </Button>
-          </Box>
-        )}
+              program
+            </Link>
+            {"'s "}
+            <Link
+              href={
+                voteAccount == null
+                  ? `https://explorer.solana.com/address/${voteAccount?.publicKey.toString()}`
+                  : ""
+              }
+              underline="always"
+            >
+              vote account
+            </Link>{" "}
+            has not been initialized yet:
+          </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={initializeVoting}
+            className={classes.button}
+          >
+            Initialize Program
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 }

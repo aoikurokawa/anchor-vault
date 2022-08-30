@@ -16,9 +16,9 @@ import { web3 } from "@project-serum/anchor";
 import Main from "../src/components/Main";
 
 // const localnet = "http://127.0.0.1:8899";
-// const devnet = clusterApiUrl("devnet");
-const mainnet = clusterApiUrl("mainnet-beta");
-const network = mainnet;
+const devnet = clusterApiUrl("devnet");
+// const mainnet = clusterApiUrl("mainnet-beta");
+const network = devnet;
 
 // const wallets = [getPhantomWallet()];
 
@@ -93,6 +93,7 @@ function AppWrappedWithProviders() {
         setVoteAccount(kp);
       })
       .catch((error) => {
+        setVoteAccount(web3.Keypair.generate());
         console.log(error);
         enqueueSnackbar("Could not fetch vote account", { variant: "error" });
       });

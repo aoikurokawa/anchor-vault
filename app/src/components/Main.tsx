@@ -80,14 +80,15 @@ export default function Main({ network, voteAccount }: IMain) {
     const provider = await getProvider();
     const program = new Program(idl as Idl, programID, provider);
     try {
-      await program.rpc.initialize({
-        accounts: {
+      await program.methods
+        .initialize()
+        .accounts({
           voteAccount: voteAccount.publicKey,
           user: provider.wallet.publicKey,
           systemProgram: web3.SystemProgram.programId,
-        },
-        signers: [voteAccount],
-      });
+        })
+        .signers([voteAccount])
+        .rpc();
 
       const account: any = await program.account.voteAccount.fetch(
         voteAccount.publicKey
