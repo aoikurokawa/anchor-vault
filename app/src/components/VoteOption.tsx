@@ -1,5 +1,5 @@
-import { Button, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Button, Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useWallet } from "@solana/wallet-adapter-react";
 import React from "react";
 import { capitalize } from "../utils";
@@ -20,6 +20,7 @@ interface IVoteOption {
 }
 
 export default function VoteOption({ side, handleVote }: IVoteOption) {
+  // @ts-ignore
   const classes = useStyles();
   const wallet = useWallet();
   return (

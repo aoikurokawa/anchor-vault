@@ -3,7 +3,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { Connection } from "@solana/web3.js";
 import { Program, AnchorProvider, web3, Idl } from "@project-serum/anchor";
 import { useState } from "react";
-import { Box, Container, Grid } from "@material-ui/core";
+import { Box, Container, Grid } from "@mui/material";
 
 import idl from "../idl.json";
 import Navbar from "./Navbar";

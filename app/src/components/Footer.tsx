@@ -3,15 +3,15 @@ import {
   Box,
   Container,
   Link,
-  makeStyles,
   Toolbar,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import GitHubIcon from "@material-ui/icons/GitHub";
+// import TwitterIcon from "@mui/material/icons/Twitter";
+// import GitHubIcon from "@material-ui/icons/GitHub";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   root: {
     backgroundColor: "transparent",
     boxShadow: "none",
@@ -33,6 +33,7 @@ interface IFooter {
 }
 
 export default function Footer({ programID, voteAccount }: IFooter) {
+  // @ts-ignore
   const classes = useStyles();
   return (
     <AppBar position="static" className={classes.root}>
@@ -67,7 +68,7 @@ export default function Footer({ programID, voteAccount }: IFooter) {
               Icon Credits
             </Link>
           </Typography>
-          <Box>
+          {/* <Box>
             <Link
               className={classes.twitter}
               href="https://twitter.com/bfriel_"
@@ -77,7 +78,7 @@ export default function Footer({ programID, voteAccount }: IFooter) {
             <Link href="https://github.com/bfriel/crunchy-vs-smooth">
               <GitHubIcon />
             </Link>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,4 +1,4 @@
-import { Box, Link, List, ListItem, Typography } from "@material-ui/core";
+import { Box, Link, List, ListItem, Typography } from "@mui/material";
 import React from "react";
 
 interface IVoteHistory {

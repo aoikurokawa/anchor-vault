@@ -7,13 +7,13 @@ import {
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import { FakeWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { SnackbarProvider, useSnackbar } from "notistack";
-import { createTheme, ThemeProvider } from "@material-ui/core";
-import { blue, orange } from "@material-ui/core/colors";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { blue, orange } from "@mui/material/colors";
 import { clusterApiUrl } from "@solana/web3.js";
 import { useCallback, useEffect, useState } from "react";
 import { web3 } from "@project-serum/anchor";
 
-import Main from "./components/Main";
+import Main from "../src/components/Main";
 
 // const localnet = "http://127.0.0.1:8899";
 // const devnet = clusterApiUrl("devnet");
@@ -31,34 +31,34 @@ const theme = createTheme({
       main: orange[300],
     },
   },
-  overrides: {
-    MuiButtonBase: {
-      root: {
-        justifyContent: "flex-start",
-      },
-    },
-    MuiButton: {
-      root: {
-        textTransform: undefined,
-        padding: "12px 16px",
-        fontWeight: 600,
-      },
-      startIcon: {
-        marginRight: 8,
-      },
-      endIcon: {
-        marginLeft: 8,
-      },
-      label: {
-        color: "white",
-      },
-    },
-    MuiLink: {
-      root: {
-        color: "initial",
-      },
-    },
-  },
+  // overrides: {
+  //   MuiButtonBase: {
+  //     root: {
+  //       justifyContent: "flex-start",
+  //     },
+  //   },
+  //   MuiButton: {
+  //     root: {
+  //       textTransform: undefined,
+  //       padding: "12px 16px",
+  //       fontWeight: 600,
+  //     },
+  //     startIcon: {
+  //       marginRight: 8,
+  //     },
+  //     endIcon: {
+  //       marginLeft: 8,
+  //     },
+  //     label: {
+  //       color: "white",
+  //     },
+  //   },
+  //   MuiLink: {
+  //     root: {
+  //       color: "initial",
+  //     },
+  //   },
+  // },
 });
 
 // Nest app within <SnackbarProvider /> so that we can set up Snackbar notifications on Wallet errors

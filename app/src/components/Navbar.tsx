@@ -1,8 +1,9 @@
-import { AppBar, Container, makeStyles, Toolbar } from "@material-ui/core";
+import { AppBar, Container, Toolbar } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import React from "react";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   root: {
     backgroundColor: "transparent",
     boxShadow: "none",
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
+  // @ts-ignore
   const classes = useStyles();
   return (
     <AppBar position="static" className={classes.root}>

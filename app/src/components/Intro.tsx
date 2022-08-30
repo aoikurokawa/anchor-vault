@@ -1,6 +1,6 @@
-import { Box, Button, Link, Typography } from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
-import { makeStyles } from "@material-ui/styles";
+import { Box, Button, Link, Typography } from "@mui/material";
+import { green } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
 import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import React from "react";
@@ -41,6 +41,7 @@ export default function Intro({
   voteAccount,
 }: IIntro) {
   const wallet = useWallet();
+  // @ts-ignore
   const classes = useStyles();
   return (
     <Box textAlign="center">

@@ -1,14 +1,9 @@
-import {
-  Avatar,
-  Box,
-  LinearProgress,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Box, LinearProgress, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import { formatWithCommas, percentize } from "../utils";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   avatar: {
     height: 48,
     width: 48,
@@ -32,6 +27,7 @@ interface IVoteTally {
 
 // Show vote counts for each side
 export default function VoteTally({ votes }: IVoteTally) {
+  // @ts-ignore
   const classes = useStyles();
 
   function getProgress() {
