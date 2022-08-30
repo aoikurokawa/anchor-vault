@@ -1,9 +1,11 @@
+import React, { useMemo } from "react";
+
 import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
-import { getPhantomWallet } from "@solana/wallet-adapter-wallets";
+import { FakeWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { SnackbarProvider, useSnackbar } from "notistack";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { blue, orange } from "@material-ui/core/colors";
@@ -18,7 +20,7 @@ import Main from "./components/Main";
 const mainnet = clusterApiUrl("mainnet-beta");
 const network = mainnet;
 
-const wallets = [getPhantomWallet()];
+// const wallets = [getPhantomWallet()];
 
 const theme = createTheme({
   palette: {
@@ -63,6 +65,21 @@ const theme = createTheme({
 function AppWrappedWithProviders() {
   const { enqueueSnackbar } = useSnackbar();
   const [voteAccount, setVoteAccount] = useState({});
+
+  const wallets = useMemo(
+    () => [
+      /**
+       * Select the wallets you wish to support, by instantiating wallet adapters here.
+       *
+       * Common adapters can be found in the npm package `@solana/wallet-adapter-wallets`.
+       * That package supports tree shaking and lazy loading -- only the wallets you import
+       * will be compiled into your application, and only the dependencies of wallets that
+       * your users connect to will be loaded.
+       */
+      new FakeWalletAdapter(),
+    ],
+    []
+  );
 
   useEffect(() => {
     fetch("/voteAccount")

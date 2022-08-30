@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 import idl from "../idl.json";
 
-export const preflightCommitment = "processed";
+export const preflightCommitment = "recent";
 export const programID = new PublicKey(idl.metadata.address);
 
 export const capitalize = (string: any) => {

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Connection } from "@solana/web3.js";
-import { Program, Provider, web3 } from "@project-serum/anchor";
-import idl from "../idl.json";
+import { Program, AnchorProvider, web3, Idl } from "@project-serum/anchor";
 import { useState } from "react";
 import { Box, Container, Grid } from "@material-ui/core";
+
+import idl from "../idl.json";
 import Navbar from "./Navbar";
 import VoteOption from "./VoteOption";
 import VoteTally from "./VoteTally";
@@ -19,9 +20,20 @@ interface IMain {
   voteAccount: any;
 }
 
+interface IVoteAccount {
+  crunchy: number;
+  smooth: number;
+}
+
 export default function Main({ network, voteAccount }: IMain) {
   const { enqueueSnackbar } = useSnackbar();
-  const wallet = useWallet();
+  const { publicKey, wallet, signTransaction, signAllTransactions } =
+    useWallet();
+  const signerWallet = {
+    publicKey: publicKey!,
+    signTransaction: signTransaction!,
+    signAllTransactions: signAllTransactions!,
+  };
 
   const [votes, setVotes] = useState({
     crunchy: 0,
@@ -33,10 +45,12 @@ export default function Main({ network, voteAccount }: IMain) {
     // Call Solana program for vote count
     async function getVotes() {
       const connection = new Connection(network, preflightCommitment);
-      const provider = new Provider(connection, wallet, preflightCommitment);
-      const program = new Program(idl, programID, provider);
+      const provider = new AnchorProvider(connection, signerWallet, {
+        preflightCommitment: "recent",
+      });
+      const program = new Program(idl as Idl, programID, provider);
       try {
-        const account = await program.account.voteAccount.fetch(
+        const account: any = await program.account.voteAccount.fetch(
           voteAccount.publicKey
         );
         setVotes({
@@ -55,14 +69,16 @@ export default function Main({ network, voteAccount }: IMain) {
 
   async function getProvider() {
     const connection = new Connection(network, preflightCommitment);
-    const provider = new Provider(connection, wallet, preflightCommitment);
+    const provider = new AnchorProvider(connection, signerWallet, {
+      preflightCommitment: "recent",
+    });
     return provider;
   }
 
   // Initialize the program if this is the first time its launched
   async function initializeVoting() {
     const provider = await getProvider();
-    const program = new Program(idl, programID, provider);
+    const program = new Program(idl as Idl, programID, provider);
     try {
       await program.rpc.initialize({
         accounts: {
@@ -73,7 +89,7 @@ export default function Main({ network, voteAccount }: IMain) {
         signers: [voteAccount],
       });
 
-      const account = await program.account.voteAccount.fetch(
+      const account: any = await program.account.voteAccount.fetch(
         voteAccount.publicKey
       );
 
@@ -92,7 +108,7 @@ export default function Main({ network, voteAccount }: IMain) {
   // Vote for either crunchy or smooth. Poll for updated vote count on completion
   async function handleVote(side: any) {
     const provider = await getProvider();
-    const program = new Program(idl, programID, provider);
+    const program = new Program(idl as Idl, programID, provider);
     try {
       const tx =
         side === "crunchy"
@@ -107,7 +123,7 @@ export default function Main({ network, voteAccount }: IMain) {
               },
             });
 
-      const account = await program.account.voteAccount.fetch(
+      const account: any = await program.account.voteAccount.fetch(
         voteAccount.publicKey
       );
       setVotes({
