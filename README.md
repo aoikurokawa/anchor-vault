@@ -1,8 +1,18 @@
-# Solana Program (Crunchy VS Smooth)
+# Vault
 
 ## Overview
 
-<img width="1457" alt="Screen Shot 2022-08-30 at 6 09 04 PM" src="https://user-images.githubusercontent.com/62386689/187421949-4544ff33-4a28-450a-b6f7-e4b62bb1615c.png">
+1. Initialize the vault
+2. Deposit fund there
+3. Withdraw from the vault
+
+## Getting started
+
+### Build the project
+
+```bash
+anchor b
+```
 
 ## References
 - https://www.brianfriel.xyz/learning-how-to-build-on-solana/
